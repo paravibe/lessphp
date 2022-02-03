@@ -1,7 +1,7 @@
 <?php
 
 /**
- * lessphp v0.5.0
+ * lessphp v0.5.1
  * http://leafo.net/lessphp
  *
  * LESS CSS compiler, adapted from http://lesscss.org
@@ -661,10 +661,12 @@ class lessc {
         }
 
         // check for a rest
-        $last = end($args);
-        if ($last[0] == "rest") {
+        if (!empty($args)) {
+          $last = end($args);
+          if ($last[0] == "rest") {
             $rest = array_slice($orderedValues, count($args) - 1);
-            $this->set($last[1], $this->reduce(array("list", " ", $rest)));
+            $this->set($last[1], $this->reduce(["list", " ", $rest]));
+          }
         }
 
         // wow is this the only true use of PHP's + operator for arrays?
